@@ -1,0 +1,65 @@
+#!/bin/bash
+
+set -e
+
+rm -rf secret
+mkdir secret
+
+GEN_NAME=./gen
+SOL_NAME=../submissions/accepted/mathemagicians_sl.cpp
+
+g++ -std=gnu++11 gen.cpp -o gen
+g++ -std=gnu++11 -Wconversion -fsanitize=address -g3 $SOL_NAME -o sol -O3
+
+CURCASE=-1
+
+# Arguments: testcasename
+testcase () {
+  CURCASE=$((CURCASE + 1))
+  NAME=`printf "%02d" $CURCASE`$1
+  echo "Case $NAME"
+  $GEN_NAME ${*:2} > secret/$NAME.in
+  ./sol < secret/$NAME.in > secret/$NAME.ans
+}
+
+testcase random-small-1 random 2294 4
+testcase random-small-2 random 2295 5
+testcase random-small-3 random 2296 6
+testcase random-small-4 random 2297 20
+
+testcase random-large-1 random 2298 100000
+testcase random-large-2 random 2299 99999
+testcase random-large-3 random 2300 100000
+testcase random-large-4 random 2301 99997
+
+testcase mono-coloured-1 monoColoured 2302 3
+testcase mono-coloured-2 monoColoured 2303 4
+testcase mono-coloured-3 monoColoured 2304 5
+testcase mono-coloured-4 monoColoured 2305 79
+testcase mono-coloured-5 monoColoured 2306 99999
+testcase mono-coloured-6 monoColoured 2307 100000
+
+testcase every-other-1 everyOther 2308 4
+testcase every-other-2 everyOther 2309 5
+testcase every-other-3 everyOther 2310 100
+testcase every-other-4 everyOther 2311 99999
+testcase every-other-5 everyOther 2312 100000
+
+testcase same-region-n-1 regionNumber 2313 9 4 4
+testcase same-region-n-2 regionNumber 2314 193 2 2
+testcase same-region-n-3 regionNumber 2315 2913 1 1
+testcase same-region-n-4 regionNumber 2316 39821 39818 39818
+testcase same-region-n-5 regionNumber 2317 99799 99798 99798
+testcase same-region-n-6 regionNumber 2318 100000 99998 99998
+testcase same-region-n-7 regionNumber 2319 99999 2 2
+testcase same-region-n-8 regionNumber 2327 100000 382 382
+
+testcase region-number-1 regionNumber 2320 5 4 2
+testcase region-number-2 regionNumber 2321 8 2 4
+testcase region-number-3 regionNumber 2322 5129 816 818
+testcase region-number-4 regionNumber 2323 19899 19898 19896
+testcase region-number-5 regionNumber 2324 100000 58392 59402
+testcase region-number-6 regionNumber 2325 99999 99998 99996
+testcase region-number-7 regionNumber 2326 99965 514 512
+testcase region-number-8 regionNumber 2328 100000 100000 99998
+testcase region-number-9 regionNumber 2329 100000 99998 100000

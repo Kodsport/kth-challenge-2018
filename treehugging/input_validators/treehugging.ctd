@@ -1,0 +1,7 @@
+INT(2, 10^5, n) NEWLINE
+REP(2*n - 2)
+	INT(1, n, a)
+	SPACE
+	INT(a+1, n)
+	NEWLINE
+END

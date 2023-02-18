@@ -1,0 +1,7 @@
+source: KTH Challenge 2018
+author: Per Austrin
+license: cc by-sa
+validation: custom
+
+limits:
+  output: 24576

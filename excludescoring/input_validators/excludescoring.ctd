@@ -1,0 +1,7 @@
+INT(2,10,n) SPACE INT(1,10^5,m) NEWLINE
+REP(m)
+   REP(n-1, SPACE)
+      INT(0,101,score)
+   END
+   NEWLINE
+END

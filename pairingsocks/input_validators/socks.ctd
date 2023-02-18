@@ -1,0 +1,5 @@
+INT(1, 10^5, n) NEWLINE
+REP(2*n, SPACE)
+   INT(1, 10^9, ai)
+END
+NEWLINE

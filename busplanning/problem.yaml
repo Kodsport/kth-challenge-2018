@@ -1,0 +1,8 @@
+source: KTH Challenge 2018
+license: cc by-sa
+author: Johan Sannemo
+validation: custom
+
+limits:
+  time_multiplier: 3
+  time_safety_margin: 3

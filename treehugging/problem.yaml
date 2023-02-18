@@ -1,0 +1,8 @@
+source: KTH Challenge 2018
+author: Simon Lindholm
+license: cc by-sa
+validation: custom
+
+limits:
+   time_multiplier: 3
+   

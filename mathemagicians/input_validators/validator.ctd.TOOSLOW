@@ -1,0 +1,19 @@
+INT(3, 100000, len)
+NEWLINE
+
+SET(differ = 0)
+REPI(i, len)
+  REGEX("[RB]", from[i])
+END
+NEWLINE
+
+REPI(i, len)
+  REGEX("[RB]", to[i])
+  IF(to[i] != from[i])
+    SET(differ = 1)
+  END
+END
+NEWLINE
+
+ASSERT(differ == 1)
+EOF

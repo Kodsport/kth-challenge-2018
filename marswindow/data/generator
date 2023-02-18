@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+PPATH=$(realpath ..)
+USE_PARALLEL=1
+. ../../gen.sh
+
+setup_dirs
+use_solution mars_mw.cpp
+
+compile gen.py
+
+sample 1
+sample 2
+sample 3
+sample 4
+
+tc begin-0 gen mode=start k=0
+tc begin-1 gen mode=start k=1
+tc begin-2 gen mode=start k=2
+tc begin-3 gen mode=start k=3
+tc begin-4 gen mode=start k=4
+tc begin-5 gen mode=start k=5
+tc begin-6 gen mode=start k=6
+tc begin-7 gen mode=start k=7
+tc begin-8 gen mode=start k=8
+tc begin-9 gen mode=start k=9
+tc begin-10 gen mode=start k=10
+tc begin-11 gen mode=start k=11
+tc begin-12 gen mode=start k=12
+tc begin-13 gen mode=start k=13
+tc begin-14 gen mode=start k=14
+
+tc end-0 gen mode=end k=0
+tc end-1 gen mode=end k=1
+tc end-2 gen mode=end k=2
+tc end-3 gen mode=end k=3
+tc end-4 gen mode=end k=4
+tc end-5 gen mode=end k=5
+tc end-6 gen mode=end k=6
+tc end-7 gen mode=end k=7
+tc end-8 gen mode=end k=8
+tc end-9 gen mode=end k=9
+tc end-10 gen mode=end k=10
+tc end-11 gen mode=end k=11
+tc end-12 gen mode=end k=12
+tc end-13 gen mode=end k=13
+tc end-14 gen mode=end k=14
+
+tc random-0 gen mode=random
+tc random-1 gen mode=random
+tc random-2 gen mode=random
+tc random-3 gen mode=random
+tc random-4 gen mode=random
+tc random-5 gen mode=random
+tc random-6 gen mode=random
+tc random-7 gen mode=random
+tc random-8 gen mode=random
+tc random-9 gen mode=random
+tc random-10 gen mode=random
+tc random-11 gen mode=random
+tc random-12 gen mode=random
+tc random-13 gen mode=random
+tc random-14 gen mode=random
+
+cleanup_programs

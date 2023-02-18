@@ -1,0 +1,8 @@
+INT(1, 16, n) SPACE INT(1, n, p) NEWLINE
+
+REPI(i, p, SPACE)
+    INT(1, n, v[i])
+END
+NEWLINE
+
+ASSERT(UNIQUE(v))

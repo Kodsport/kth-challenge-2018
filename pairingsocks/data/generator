@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+PPATH=$(realpath ..)
+USE_PARALLEL=1
+. ../../gen.sh
+
+setup_dirs
+use_solution socks_mw.cpp
+
+compile gen.py
+
+sample 1
+sample 2
+sample 3
+
+tc random-0 gen mode=random seed=0 N=3 max_type=5
+tc random-1 gen mode=random seed=1 N=100000
+tc random-2 gen mode=random seed=2 N=100000 max_type=2
+tc random-3 gen mode=random seed=3 N=2 max_type=3
+tc random-4 gen mode=random seed=4 N=1 max_type=4
+tc random-5 gen mode=random seed=5 N=2 max_type=2
+tc random-6 gen mode=random seed=6 N=4 max_type=6
+tc random-7 gen mode=random seed=7 N=5 max_type=2
+tc random-8 gen mode=random seed=8 N=6 max_type=2
+tc random-9 gen mode=random seed=9 N=7 max_type=2
+
+tc consecutive-0 gen mode=consecutive N=5
+tc consecutive-1 gen mode=consecutive postprocess=large_stack N=10
+tc consecutive-2 gen mode=consecutive postprocess=random_stack seed=2 N=7
+tc consecutive-3 gen mode=consecutive postprocess=random_stack seed=3 p=0.2 N=15
+tc consecutive-4 gen mode=consecutive postprocess=random_stack seed=4 p=0.5 N=50
+tc consecutive-5 gen mode=consecutive swaps=1 N=6
+tc consecutive-6 gen mode=consecutive changes=1 N=8
+tc consecutive-7 gen mode=consecutive postprocess=shuffle N=128
+tc consecutive-8 gen mode=consecutive postprocess=shuffle N=10
+tc consecutive-9 gen mode=consecutive N=100000
+
+tc same-0 gen mode=same N=47
+tc same-1 gen mode=same N=99999 max_type=3
+tc same-2 gen mode=same N=100000 changes=1 max_type=100
+tc same-3 gen mode=same N=571 changes=4 max_type=2
+tc same-4 gen mode=same N=1 max_type=1
+tc same-5 gen mode=same N=100000 changes=2
+tc same-6 gen mode=same N=100000
+
+tc pairs-0 gen mode=pairs N=12
+tc pairs-1 gen mode=pairs postprocess=large_stack N=100000
+tc pairs-2 gen mode=pairs postprocess=large_stack swaps=1 N=100000
+tc pairs-3 gen mode=pairs postprocess=large_stack changes=1 N=99997
+tc pairs-4 gen mode=pairs postprocess=random_stack p=0.3 seed=5 changes=1 N=100000
+tc pairs-5 gen mode=pairs postprocess=random_stack p=0.5 seed=6 N=100000
+tc pairs-6 gen mode=pairs postprocess=random_stack p=0.5 swaps=1 seed=7 N=100000
+tc pairs-7 gen mode=pairs postprocess=random_stack p=0.99 changes=3 swaps=2 seed=8 N=100000
+tc pairs-8 gen mode=pairs postprocess=random_stack p=0.1 seed=9 N=85993
+tc pairs-9 gen mode=pairs postprocess=random_stack p=0.4 seed=10 N=985
+tc pairs-10 gen mode=pairs postprocess=random_stack p=0.5 seed=11 N=8
+tc pairs-11 gen mode=pairs postprocess=random_stack p=0.5 swaps=1 seed=12 N=100000
+tc pairs-12 gen mode=pairs postprocess=large_stack changes=1 seed=13 N=100000
+tc pairs-13 gen mode=pairs postprocess=large_stack swaps=2 seed=14 N=90000
+tc pairs-14 gen mode=pairs postprocess=random_stack p=0.6 seed=15 N=100000 max_type=20
+tc pairs-15 gen mode=pairs postprocess=random_stack p=0.4 seed=16 N=100000 max_type=2
+tc pairs-16 gen mode=pairs postprocess=random_stack p=0.5 seed=17 swaps=1 N=100000 max_type=317
+tc pairs-17 gen mode=pairs postprocess=random_stack p=0.2 seed=18 changes=1 N=97875 max_type=6788
+tc pairs-18 gen mode=pairs postprocess=large_stack seed=19 N=100000 swaps=2 max_type=3
+tc pairs-19 gen mode=pairs N=100000
+tc pairs-20 gen mode=pairs N=100000 changes=1
+tc pairs-21 gen mode=pairs postprocess=random_stack p=0.0001 seed=20 N=98921 max_type=1000
+tc pairs-22 gen mode=pairs postprocess=random_stack p=0.5 seed=21 N=53 max_type=4
+tc pairs-23 gen mode=pairs postprocess=random_stack p=0.8 seed=22 N=192 max_type=5
+tc pairs-24 gen mode=pairs postprocess=random_stack p=0.2 seed=23 N=192 swaps=1 max_type=91
+tc pairs-25 gen mode=pairs postprocess=random_stack p=0.51 seed=24 N=100000 swaps=3
+
+cleanup_programs

@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+PPATH=$(realpath ..)
+USE_PARALLEL=1
+ulimit -s unlimited
+. ../../gen.sh
+
+setup_dirs
+use_solution twosat_sl.cpp
+
+compile gen_random.py
+compile gen_trees.py
+compile gen_pattern.py
+
+sample 1
+sample 2
+
+# Entirely random input; the large ones all give IMPOSSIBLE
+tc rand-large1 gen_random n=100000 zeroes=no
+tc rand-large2 gen_random n=100000 zeroes=yes
+tc rand-small1 gen_random n=3 zeroes=no
+tc rand-small2 gen_random n=4 zeroes=no
+tc rand-small3 gen_random n=5 zeroes=no
+tc rand-small4 gen_random n=6 zeroes=no
+tc rand-small5 gen_random n=10 zeroes=no
+tc rand-small7 gen_random n=3 zeroes=yes
+tc rand-small8 gen_random n=5 zeroes=yes
+tc rand-small9 gen_random n=10 zeroes=yes
+
+# Input generated from real trees of various shapes
+tc star-star gen_trees n=100000 mode=star,star
+tc line-line gen_trees n=100000 mode=line,line
+tc line-star gen_trees n=99999 mode=line,star
+tc star-line gen_trees n=100000 mode=star,line
+tc tiny-random gen_trees n=5 mode=random
+tc small-random gen_trees n=10 mode=random
+tc random gen_trees n=100000 mode=random
+tc shallow gen_trees n=100000 mode=shallow
+tc deep gen_trees n=100000 mode=deep
+tc deeper gen_trees n=100000 mode=deeper
+tc mix-1 gen_trees n=100000 mode=random,line
+tc mix-2 gen_trees n=100000 mode=random,star
+tc mix-3 gen_trees n=100000 mode=shallow,deeper
+tc swap-possible1 gen_trees n=100000 mode=random error=swap,5 seed=112
+tc swap-possible2 gen_trees n=100000 mode=shallow error=swap,10 seed=130
+
+# Special cases
+tc minimal gen_random n=2 zeroes=no
+tc multiedge1 gen_pattern n=100000 mode=multiedge1
+tc multiedge2 gen_pattern n=100000 mode=multiedge2
+tc cycle1 gen_pattern n=100000 mode=cycle1
+tc cycle2 gen_pattern n=100000 mode=cycle2
+tc cycle3 gen_pattern n=100000 mode=cycle3
+
+# Various IMPOSSIBLE cases
+tc deg0 gen_trees n=100000 mode=random error=deg0
+tc swap-impossible1 gen_trees n=100000 mode=shallow error=swap,10 seed=129
+tc swap-impossible2 gen_trees n=100000 mode=shallow error=swap,1000
+
+cleanup_programs
